@@ -10,7 +10,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -20,35 +20,38 @@ class ProductCard extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage("${productsModel!.images![0]}"))),
+                      image: NetworkImage(productsModel!.image))),
             ),
             const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Text(productsModel!.title,
+                style: const TextStyle(
+                  overflow: TextOverflow.ellipsis
+                ),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Name: ${productsModel!.title}"),
-                    Text("Price: ${productsModel!.price}"),
+                    Text("GH₵ ${productsModel!.price}"),
+                    InkWell(
+              child: const Text(
+                "View more",
+                style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline),
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProductDetailsView(productsModel: productsModel,)));
+              },
+            )
                   ],
                 ),
-                InkWell(
-                  child: const Text(
-                    "View more",
-                    style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProductDetailsView()));
-                  },
-                )
               ],
             )
           ],

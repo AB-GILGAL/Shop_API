@@ -2,7 +2,8 @@ import 'package:api_app/models/product_model.dart';
 import 'package:http/http.dart';
 
 class ProductsNetwork {
-  String url = "https://api.escuelajs.co/api/v1/products";
+  // String url = "https://api.escuelajs.co/api/v1/products";
+  String url = "https://fakestoreapi.com/products";
 
   // get data from server
   Future <List<ProductsModel>> getProducts() async {

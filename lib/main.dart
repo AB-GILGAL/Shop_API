@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: ShoppingHomePage(),
   ));
 }
@@ -33,7 +33,7 @@ class _ShoppingHomePageState extends State<ShoppingHomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("API_SHOP"),
+        title: const Text("API_SHOP"),
       ),
       body: FutureBuilder<List<ProductsModel>>(
         future: productsData,
@@ -41,13 +41,13 @@ class _ShoppingHomePageState extends State<ShoppingHomePage> {
           // wait for data from snapshot
           if (snapshot.connectionState == ConnectionState.waiting &&
               snapshot.data == null) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
             // when done waiting and yet the data is null
           } else if (snapshot.connectionState == ConnectionState.done &&
               snapshot.data == null) {
-            return Center(
+            return const Center(
               child: Text(
                   "Oops, something went wrong. Check your connection and try again.",
                   textAlign: TextAlign.center,),

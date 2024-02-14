@@ -5,7 +5,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class ProductDetailsView extends StatefulWidget {
-  ProductDetailsView({Key? key, productsModel}) : super(key: key);
+  ProductsModel? productsModel;
+  ProductDetailsView({Key? key, required this.productsModel}) : super(key: key);
 
   @override
   State<ProductDetailsView> createState() => _ProductDetailsViewState();
@@ -23,12 +24,13 @@ ProductsModel? productsModel;
           children: [
             Container(
               decoration: BoxDecoration(
+                color: Colors.blueGrey,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(productsModel!.images![0]))
+                  image: NetworkImage(widget.productsModel!.image))
               ),
               height: MediaQuery.of(context).size.height/4,
-              color: Colors.blueGrey,
+              
             ),
             Expanded(
               child: Padding(
@@ -36,29 +38,32 @@ ProductsModel? productsModel;
                 child: Column(
                   children: [
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Name: ${productsModel!.title}"),
-                             Text("Price: ${productsModel!.price}"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            ratingStar(),
-                            ratingStar(),
-                            ratingStar(),
-                            ratingStar(),
-                            ratingStar(),
-                          ],
-                        )
+                        Text(widget.productsModel!.title,
+                        style: const TextStyle(
+                  overflow: TextOverflow.ellipsis
+                ),),
+                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             Text("GH₵ ${widget.productsModel!.price}"),
+                             Row(
+                      children: [
+                        ratingStar(),
+                        ratingStar(),
+                        ratingStar(),
+                        ratingStar(),
+                        ratingStar(),
+                      ],
+                    )
+                           ],
+                         ),
                       ],
                     ),
                    const SizedBox(height: 10,),
-                    Text("Description: ${productsModel!.description}"),
+                    Text("Description: ${widget.productsModel!.description}"),
                     const Spacer(),
                     TextButton(
                       style: TextButton.styleFrom(backgroundColor: Colors.teal),
